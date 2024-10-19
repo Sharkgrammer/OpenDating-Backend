@@ -38,8 +38,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'core.apps.CoreConfig',
-    'api.apps.ApiConfig',
+    'core',
+    'api',
     'rest_framework',
     'rest_framework_simplejwt',
     'django.contrib.admin',

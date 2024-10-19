@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager, PermissionsMixin)
 
 # System Models
-from core.functions.gen_functions import get_today
+from core.functions.gen_functions import get_today, generate_random_string
 
 
 class SystemUserManager(BaseUserManager):
@@ -47,6 +47,8 @@ class SystemUserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.BigAutoField(primary_key=True)
+    uid = models.CharField(max_length=10, unique=True, default=generate_random_string)
+
     email = models.EmailField('Email', max_length=255, unique=True)
 
     # Personal data
@@ -70,4 +72,4 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['full_name', 'display_name']
 
     def __str__(self):
-        return self.full_name
+        return f"{self.full_name} ({self.uid})"
