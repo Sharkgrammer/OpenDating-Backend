@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from api.serializers.user import UserGetSerializer
+from core.functions.gen_functions import get_today
 from core.models import User
 
 
@@ -15,6 +16,7 @@ class UserView(APIView):
     def get(self, request):
 
         uid = request.GET.get("uid", None)
+        login = request.GET.get("login", False)
 
         user = request.user
         user_data = []
@@ -22,7 +24,12 @@ class UserView(APIView):
 
         if uid is None:
             # User has requested their own data
+            if login:
+                user.last_login = get_today()
+                user.save()
+
             user_data = user
+
         else:
             user_data = User.objects.get(uid=uid)
             context["exclude_fields"] = ["date_joined", "email", "full_name"]
