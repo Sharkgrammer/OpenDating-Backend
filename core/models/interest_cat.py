@@ -8,3 +8,7 @@ class InterestCategory(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+    class Meta:
+        verbose_name = 'Interest category'
+        verbose_name_plural = 'Interest categories'
