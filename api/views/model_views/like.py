@@ -5,15 +5,15 @@ from rest_framework.views import APIView
 from django.db.models import Q
 
 from api.serializers.like import LikeSerializer, LikeReturnedSerializer
-from core.models import Like, User
+from core.models import Like
 
 
 class LikeView(APIView):
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     parser_classes = (MultiPartParser,)
 
     def get(self, request):
-        user = User.objects.get(id=1)
+        user = request.user
 
         final_data = {}
 
