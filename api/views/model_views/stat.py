@@ -12,7 +12,7 @@ class StatView(APIView):
     parser_classes = (MultiPartParser,)
 
     def get(self, request):
-        user = User.objects.get(id=1)
+        user = request.user
 
         # We assume that the stat model already exists
 
