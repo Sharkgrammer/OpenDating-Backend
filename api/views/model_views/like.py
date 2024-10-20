@@ -13,22 +13,18 @@ class LikeView(APIView):
     parser_classes = (MultiPartParser,)
 
     def get(self, request):
-
-        returned = request.GET.get("returned", False)
-
         user = User.objects.get(id=1)
-        serializer = None
+
+        final_data = {}
+
         context = {
             'user': user
         }
 
-        if returned:
-            data = Like.objects.filter(Q(created_user=user) | Q(liked_user=user), liked_returned=True, deleted=False)
+        likes = Like.objects.filter(liked_user=user, liked_returned=False, deleted=False)
+        final_data["likes"] = LikeSerializer(likes, many=True, context=context).data
 
-            serializer = LikeReturnedSerializer(data, many=True, context=context)
-        else:
-            data = Like.objects.all()
+        messages = Like.objects.filter(Q(created_user=user) | Q(liked_user=user), liked_returned=True, deleted=False)
+        final_data["messages"] = (LikeReturnedSerializer(messages, many=True, context=context)).data
 
-            serializer = LikeSerializer(data, many=True, context=context)
-
-        return Response(serializer.data)
+        return Response(final_data)
