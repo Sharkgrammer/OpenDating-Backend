@@ -8,14 +8,12 @@ from core.models import InterestCategory
 
 
 class InterestView(APIView):
-    #permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     parser_classes = (MultiPartParser,)
 
     def get(self, request):
         # Get all interests
         data = InterestCategory.objects.all()
-
-        # user_data = user_data.prefetch_related("images")
 
         serializer = InterestCategorySerializer(data, many=True)
 

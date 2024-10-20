@@ -2,7 +2,6 @@ from django.db import models
 
 from core.functions.gen_functions import get_today
 from core.models import User
-from opendating import settings
 
 
 # TODO configure django to store images on S3 or something
@@ -16,4 +15,4 @@ class UserImage(models.Model):
     date_upload = models.DateTimeField(verbose_name='Last Update', default=get_today)
 
     def __str__(self):
-        return f"{settings.MEDIA_URL}{self.image.name}"
+        return self.image.name

@@ -19,19 +19,20 @@ class UserAdmin(BaseUserAdmin):
     )
 
     fieldsets = (
-        ('Personal Info', {'fields': ('uid', 'email', 'full_name', 'display_name', 'description', 'password')}),
+        ('Personal Info',
+         {'fields': ('uid', 'email', 'full_name', 'display_name', 'description', 'prof_image', 'password')}),
         ('Permissions', {'fields': ('is_active', 'is_admin', 'is_staff', 'deleted')}),
     )
 
     add_fieldsets = (
-        ("Add User",
-         {
-             'fields': (
-                 'email', 'full_name', 'display_name', 'description', 'password1',
-                 'password2'
-             )
-         }
-         )
+        (
+            "Add User",
+            {
+                'fields': (
+                    'email', 'full_name', 'display_name', 'description', 'prof_image', 'password1', 'password2',
+                )
+            }
+        ),
     )
 
     list_filter = ('is_active', 'is_admin', 'is_staff', 'deleted')

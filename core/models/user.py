@@ -55,6 +55,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     full_name = models.CharField('Full Name', max_length=255, blank=True)
     display_name = models.CharField('Display Name', max_length=30, blank=True)
     description = models.TextField(verbose_name='Description', blank=True)
+    prof_image = models.ImageField(verbose_name='Profile Image', upload_to='profs', max_length=None, blank=True)
 
     # TODO deal with interest data
 
