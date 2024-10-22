@@ -14,13 +14,14 @@ def set_active(self, request, queryset):
 
 class UserAdmin(BaseUserAdmin):
     list_display = (
-        'id', 'uid', 'email', 'full_name', 'display_name', 'is_active', 'is_admin',
+        'id', 'uid', 'email', 'full_name', 'display_name', 'age', 'is_active', 'is_admin',
         'is_staff', 'deleted', 'date_joined', 'last_login', 'description'
     )
 
     fieldsets = (
         ('Personal Info',
-         {'fields': ('uid', 'email', 'full_name', 'display_name', 'description', 'prof_image', 'password')}),
+         {'fields': ('uid', 'email', 'full_name', 'display_name', 'age', 'description', 'prof_image', 'interests',
+                     'password')}),
         ('Permissions', {'fields': ('is_active', 'is_admin', 'is_staff', 'deleted')}),
     )
 

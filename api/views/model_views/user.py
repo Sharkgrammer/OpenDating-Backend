@@ -33,7 +33,7 @@ class UserView(APIView):
             user_data = User.objects.get(uid=uid)
             context["exclude_fields"] = ["date_joined", "email", "full_name"]
 
-        user_data = user_data.prefetch_related("images")
+        # user_data = user_data.prefetch_related("images")
 
         serializer = UserGetSerializer(user_data, context=context)
 
